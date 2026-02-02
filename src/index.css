@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /* KBC Dark Premium Theme */
+    --background: 230 50% 5%;
+    --foreground: 45 100% 95%;
+
+    --card: 230 45% 8%;
+    --card-foreground: 45 100% 95%;
+
+    --popover: 230 45% 10%;
+    --popover-foreground: 45 100% 95%;
+
+    /* Gold/Amber Primary */
+    --primary: 38 92% 50%;
+    --primary-foreground: 230 50% 5%;
+
+    /* Deep Blue Secondary */
+    --secondary: 230 60% 15%;
+    --secondary-foreground: 45 100% 90%;
+
+    --muted: 230 40% 12%;
+    --muted-foreground: 230 20% 60%;
+
+    /* Purple Accent */
+    --accent: 270 60% 40%;
+    --accent-foreground: 45 100% 95%;
+
+    /* Game State Colors */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --correct: 142 76% 36%;
+    --correct-foreground: 142 76% 95%;
+
+    --border: 230 40% 18%;
+    --input: 230 40% 15%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    /* Game-specific tokens */
+    --timer-ring: 38 92% 50%;
+    --timer-warning: 25 95% 53%;
+    --timer-danger: 0 72% 51%;
+    
+    --question-glow: 38 100% 50%;
+    --answer-hover: 230 60% 20%;
+    --answer-selected: 38 92% 30%;
+    
+    --ladder-active: 38 92% 50%;
+    --ladder-completed: 142 76% 36%;
+    --ladder-upcoming: 230 40% 25%;
+
+    /* Gradients */
+    --gradient-bg: linear-gradient(180deg, hsl(230 50% 8%) 0%, hsl(230 60% 3%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 60%) 0%, hsl(38 92% 50%) 50%, hsl(30 90% 45%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(230 45% 12%) 0%, hsl(230 50% 8%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(38 92% 50% / 0.3) 0%, transparent 70%);
+
+    /* Sidebar */
+    --sidebar-background: 230 50% 6%;
+    --sidebar-foreground: 45 100% 90%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 230 50% 5%;
+    --sidebar-accent: 230 45% 12%;
+    --sidebar-accent-foreground: 45 100% 90%;
+    --sidebar-border: 230 40% 15%;
+    --sidebar-ring: 38 92% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  /* Gold text gradient */
+  .text-gold-gradient {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effects */
+  .glow-gold {
+    box-shadow: 
+      0 0 20px hsl(38 92% 50% / 0.4),
+      0 0 40px hsl(38 92% 50% / 0.2),
+      0 0 60px hsl(38 92% 50% / 0.1);
+  }
+
+  .glow-correct {
+    box-shadow: 
+      0 0 20px hsl(142 76% 36% / 0.6),
+      0 0 40px hsl(142 76% 36% / 0.3),
+      0 0 60px hsl(142 76% 36% / 0.15);
+  }
+
+  .glow-wrong {
+    box-shadow: 
+      0 0 20px hsl(0 72% 51% / 0.6),
+      0 0 40px hsl(0 72% 51% / 0.3),
+      0 0 60px hsl(0 72% 51% / 0.15);
+  }
+
+  .glow-text-gold {
+    text-shadow: 
+      0 0 10px hsl(38 92% 50% / 0.5),
+      0 0 20px hsl(38 92% 50% / 0.3);
+  }
+
+  /* Background patterns */
+  .bg-stars {
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(38 92% 50% / 0.3), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(38 92% 50% / 0.2), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(38 92% 50% / 0.4), transparent),
+      radial-gradient(2px 2px at 130px 80px, hsl(38 92% 50% / 0.2), transparent),
+      radial-gradient(1px 1px at 160px 20px, hsl(38 92% 50% / 0.3), transparent);
+    background-size: 200px 100px;
+  }
+
+  /* Hexagon shape for answer buttons */
+  .hexagon-btn {
+    clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+  }
+
+  /* Answer button base */
+  .answer-btn {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, hsl(230 45% 12%) 0%, hsl(230 50% 8%) 100%);
+    border: 2px solid hsl(38 92% 50% / 0.3);
+  }
+
+  .answer-btn:hover {
+    border-color: hsl(38 92% 50% / 0.8);
+    background: linear-gradient(135deg, hsl(230 45% 15%) 0%, hsl(230 50% 10%) 100%);
+  }
+
+  .answer-btn.selected {
+    border-color: hsl(38 92% 50%);
+    background: linear-gradient(135deg, hsl(38 92% 50% / 0.2) 0%, hsl(38 92% 40% / 0.1) 100%);
+  }
+
+  .answer-btn.correct {
+    border-color: hsl(142 76% 36%);
+    background: linear-gradient(135deg, hsl(142 76% 36% / 0.3) 0%, hsl(142 76% 30% / 0.2) 100%);
+  }
+
+  .answer-btn.wrong {
+    border-color: hsl(0 72% 51%);
+    background: linear-gradient(135deg, hsl(0 72% 51% / 0.3) 0%, hsl(0 72% 45% / 0.2) 100%);
+  }
+
+  /* Ladder step styles */
+  .ladder-step {
+    @apply transition-all duration-300;
+  }
+
+  .ladder-step.active {
+    @apply text-primary glow-gold;
+  }
+
+  .ladder-step.completed {
+    color: hsl(var(--correct));
+  }
+
+  /* Timer ring animation */
+  @keyframes timer-pulse {
+    0%, 100% { 
+      opacity: 1; 
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.7; 
+      transform: scale(1.02);
+    }
+  }
+
+  .timer-warning {
+    animation: timer-pulse 0.5s ease-in-out infinite;
+  }
+
+  .timer-danger {
+    animation: timer-pulse 0.25s ease-in-out infinite;
+  }
+
+  /* Shake animation */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(38 92% 50% / 0.4), 0 0 40px hsl(38 92% 50% / 0.2);
+    }
+    50% { 
+      box-shadow: 0 0 30px hsl(38 92% 50% / 0.6), 0 0 60px hsl(38 92% 50% / 0.3);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Correct answer celebration */
+  @keyframes celebrate {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.05); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  .animate-celebrate {
+    animation: celebrate 0.5s ease-in-out;
+  }
+
+  /* Float animation for decorative elements */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Spotlight effect */
+  .spotlight {
+    background: radial-gradient(ellipse 600px 400px at 50% 30%, hsl(38 92% 50% / 0.08) 0%, transparent 70%);
+  }
+
+  /* Smooth entrance for cards */
+  @keyframes slide-up-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up-fade 0.4s ease-out forwards;
+  }
+}
